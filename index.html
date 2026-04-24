@@ -167,6 +167,38 @@
       color: var(--ink) !important;
     }
 
+    /* Mobile nav toggle — hidden on desktop, shown on small screens */
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 2px solid var(--ink);
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+      transition: background 0.18s;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .nav-toggle[aria-expanded="true"] { background: var(--ink); }
+    .nav-toggle[aria-expanded="true"] span { background: var(--paper); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
     /* ---------- BUTTONS ---------- */
     .btn {
       display: inline-flex;
@@ -857,9 +889,47 @@
     @media (max-width: 640px) {
       body { font-size: 16px; }
       .container { padding: 0 22px; }
-      .nav-links a:not(.nav-cta) { display: none; }
+
+      /* Mobile nav: show hamburger, turn links into a dropdown panel */
+      .nav-toggle { display: inline-flex; }
       .nav-inner { height: 88px; }
       .nav-logo { height: 50px; }
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: var(--paper);
+        border-bottom: 2px solid var(--ink);
+        padding: 8px 22px 20px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
+        pointer-events: none;
+      }
+      .nav-links.open {
+        max-height: 520px;
+        opacity: 1;
+        padding: 8px 22px 20px;
+        pointer-events: auto;
+      }
+      .nav-links a {
+        font-size: 1rem;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--rule-soft, #E5E5E5);
+      }
+      .nav-links a:last-child { border-bottom: none; }
+      .nav-links .nav-cta {
+        margin-top: 14px;
+        justify-content: center;
+        text-align: center;
+        padding: 16px 22px !important;
+        font-size: 0.9rem !important;
+      }
       .hero-visual { height: 360px; }
       .card-top { width: 220px; right: 10px; }
       .card-mid { width: 240px; top: 120px; }
@@ -891,7 +961,7 @@
       <a class="nav-logo" href="#top" aria-label="CMO Systems home">
         <img src="logo-horizontal-bow-transparent.png" alt="CMO Systems" />
       </a>
-      <nav class="nav-links" aria-label="Primary">
+      <nav class="nav-links" id="primary-nav" aria-label="Primary">
         <a href="#program">The Program</a>
         <a href="#scorecard">Scorecard</a>
         <a href="#outcomes">Outcomes</a>
@@ -900,6 +970,11 @@
           <span class="arrow" aria-hidden="true">→</span>
         </a>
       </nav>
+      <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </header>
 
@@ -1030,7 +1105,7 @@
               <li>Process and pipeline diagnostics</li>
             </ul>
             <div class="deliverable">
-              <div class="label">Deliverable</div>
+              <div class="label">DELIVERED:</div>
               <div class="name">Revenue Friction Scorecard</div>
             </div>
           </article>
@@ -1045,7 +1120,7 @@
               <li>Build execution clarity across teams</li>
             </ul>
             <div class="deliverable">
-              <div class="label">Deliverable</div>
+              <div class="label">DELIVERED:</div>
               <div class="name">CMO Operating Blueprint</div>
             </div>
           </article>
@@ -1060,7 +1135,7 @@
               <li>Implement KPI tracking and reporting cadence</li>
             </ul>
             <div class="deliverable">
-              <div class="label">Deliverable</div>
+              <div class="label">DELIVERED:</div>
               <div class="name">Measurable Performance Gains</div>
             </div>
           </article>
@@ -1274,7 +1349,7 @@
           <h4>Connect</h4>
           <a href="mailto:hello@cmosystems.co">hello@cmosystems.co</a>
           <a href="tel:+13124891607">+1 (312) 489-1607</a>
-          <a href="https://www.linkedin.com/in/phillipryanblock/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://www.linkedin.com/company/hello-cmo-systems/" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="footer-bottom">
@@ -1286,6 +1361,34 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.getElementById('primary-nav');
+      if (!toggle || !links) return;
+
+      function setOpen(open) {
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        links.classList.toggle('open', open);
+      }
+
+      toggle.addEventListener('click', function () {
+        var isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+
+      // Close menu when any nav link is tapped
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { setOpen(false); });
+      });
+
+      // Reset state if viewport grows past mobile breakpoint
+      var mql = window.matchMedia('(min-width: 641px)');
+      var onChange = function (e) { if (e.matches) setOpen(false); };
+      if (mql.addEventListener) mql.addEventListener('change', onChange);
+      else if (mql.addListener) mql.addListener(onChange);
+    })();
   </script>
 </body>
 </html>

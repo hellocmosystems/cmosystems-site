@@ -43,7 +43,7 @@ Search `index.html` for these values:
 | `#book-a-call` | 3 spots | Replace with your calendar URL (Calendly / SavvyCal / etc.) |
 | `hello@cmosystems.co` | Nav CTA, CTA band, footer | Confirm — the April 2026 brief lists `hello.cmosystems@gmail.com`. Use whichever inbox you're monitoring. |
 | `+1 (312) 489-1607` | Footer | From the brief — confirm this is still current |
-| `linkedin.com/in/phillipryanblock` | Footer | Confirm this is the LinkedIn you want linked |
+| `linkedin.com/company/hello-cmo-systems` | Footer | Points to CMO Systems company page on LinkedIn |
 | `https://revfrictionscorecard.cmosystems.co` | Multiple | Already correct |
 
 ## Deploy: GitHub Pages → GoDaddy
