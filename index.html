@@ -696,6 +696,87 @@
       margin-top: 4px;
     }
 
+    /* ---------- ABOUT THE OPERATOR ---------- */
+    .about-operator {
+      background: var(--cream);
+      padding: 110px 0;
+      border-bottom: 2px solid var(--ink);
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 72px;
+      align-items: start;
+    }
+    .about-photo {
+      position: relative;
+    }
+    .about-photo .frame {
+      border: 2px solid var(--ink);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow-lg);
+    }
+    .about-photo .frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .about-caption {
+      border: 2px solid var(--ink);
+      border-top: none;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 16px 22px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .about-caption .name {
+      font-family: "Oswald", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .about-caption .role {
+      font-family: "Inter", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-20);
+    }
+    .about-copy .eyebrow { margin-bottom: 18px; }
+    .about-copy h2 { margin-bottom: 32px; }
+    .about-copy h2 .serif { color: var(--accent); }
+    .about-copy p { font-size: 1.02rem; color: var(--ink-80); max-width: 60ch; }
+    .about-copy .lead {
+      font-size: 1.18rem;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+    .about-pull {
+      margin-top: 36px;
+      padding: 28px 32px;
+      border-left: 4px solid var(--accent);
+      background: var(--paper);
+      border-top: 2px solid var(--ink);
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+    }
+    .about-pull .text {
+      font-family: "Fraunces", Georgia, serif;
+      font-style: italic;
+      font-size: 1.35rem;
+      line-height: 1.35;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+
     /* ---------- EDITORIAL PULL QUOTE ---------- */
     .thesis-quote {
       background: var(--paper);
@@ -880,6 +961,11 @@
       .who { grid-template-columns: 1fr; gap: 36px; }
       .fractional { grid-template-columns: 1fr; gap: 28px; padding: 36px; }
       .thesis-quote .container { grid-template-columns: 1fr; gap: 36px; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-photo { max-width: 360px; margin: 0 auto; }
+      .about-operator { padding: 80px 0; }
+      .about-pull { padding: 24px 26px; }
+      .about-pull .text { font-size: 1.15rem; }
       .scorecard-card { grid-template-columns: 1fr; padding: 40px 32px; gap: 36px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
       section { padding: 80px 0; }
@@ -965,6 +1051,7 @@
         <a href="#program">The Program</a>
         <a href="#scorecard">Scorecard</a>
         <a href="#outcomes">Outcomes</a>
+        <a href="#about">About</a>
         <a class="nav-cta btn" href="https://revfrictionscorecard.cmosystems.co" target="_blank" rel="noopener">
           Take the Scorecard
           <span class="arrow" aria-hidden="true">→</span>
@@ -1259,6 +1346,34 @@
               <span class="text">Lack of execution clarity<small>Strategy is set; execution keeps slipping</small></span>
             </li>
           </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT THE OPERATOR -->
+    <section id="about" class="about-operator">
+      <div class="container">
+        <div class="about-inner">
+          <div class="about-photo">
+            <div class="frame">
+              <img src="ryan-block.jpg" alt="Ryan Block, founder of CMO Systems" />
+            </div>
+            <div class="about-caption">
+              <span class="name">Ryan Block</span>
+              <span class="role">Founder, CMO Systems</span>
+            </div>
+          </div>
+          <div class="about-copy">
+            <span class="eyebrow">About the Operator</span>
+            <h2>Different industries. <span class="serif">Same discipline.</span></h2>
+            <p class="lead">I build revenue execution systems that turn marketing into measurable business outcomes. My career hasn't fit neatly into one industry, and that's the point.</p>
+            <p>Over 15+ years I've run a record label, launched a digital agency that grew 190% on referrals alone, led marketing for a healthcare practice, directed enterprise demand generation with a $20M+ global budget, and owned full-funnel revenue strategy as Director of Marketing. Different scales. Same discipline: build the right systems, align the right people, and growth follows.</p>
+            <p>I've managed budgets and built teams. Structured GTM strategies. Stood up CRM and marketing automation infrastructure. Driven 60% YoY revenue growth. Delivered global training programs across the U.S., Mexico, and Europe. I've operated at the startup level and the enterprise level, and I know what translates between them.</p>
+            <p>I founded CMO Systems because most businesses don't have a marketing problem. They have a systems problem. Culture. Marketing. Operations. When those three work together, revenue follows.</p>
+            <div class="about-pull">
+              <span class="text">The throughline has always been the same: make the work perform at a higher level.</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
